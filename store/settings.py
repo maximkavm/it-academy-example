@@ -127,3 +127,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Users
 AUTH_USER_MODEL = 'users.User'
+
+# Sending e-mails
+# https://docs.djangoproject.com/en/4.0/topics/email/
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'django@geekshop'
+EMAIL_HOST_PASSWORD = 'geekshop'
+EMAIL_USE_SSL = False
+DOMAIN_NAME = 'localhost:8000'
+
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'geekshop-optimization@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'qwertypP'
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = False
+# DOMAIN_NAME = 'localhost:8000'

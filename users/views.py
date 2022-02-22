@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.contrib import messages
 
 from users.forms import UserLoginForm, UserRegistrationForm
+from users.models import User, EmailVerification
+
 
 def login(request):
     if request.method == 'POST':
@@ -37,3 +39,15 @@ def registration(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+def email_verification(request, email, code):
+    user = User.objects.get(email=email)
+    email_verification = EmailVerification.objects.filter(user=user, code=code)
+    if email_verification.exists() and not email_verification.last().is_expired():
+        user.is_verified_email = True
+        user.save()
+        auth.login(request, user)
+        return render(request, 'users/email_verification.html')
+    else:
+        return HttpResponseRedirect(reverse('index'))
