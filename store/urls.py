@@ -18,13 +18,24 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from products.views import index
+from rest_framework import routers
+
+from products.views.views import index
+from products.views.api_iews import ProductCategoryViewSet, ProductViewSet
+
+router = routers.DefaultRouter()
+router.register(r'product-categories', ProductCategoryViewSet)
+router.register(r'products', ProductViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('products/', include('products.urls', namespace='products')),
     path('users/', include('users.urls', namespace='users')),
+
+    # api urls
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 if settings.DEBUG:
