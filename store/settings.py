@@ -149,3 +149,11 @@ DOMAIN_NAME = 'localhost:8000'
 # EMAIL_USE_SSL = True
 # EMAIL_USE_TLS = False
 # DOMAIN_NAME = 'localhost:8000'
+
+# Redis settings
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}

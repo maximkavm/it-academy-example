@@ -6,6 +6,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 
 from users.models import User, EmailVerification
+from users.tasks import send_verification_email
 
 
 class UserLoginForm(AuthenticationForm):
@@ -42,4 +43,5 @@ class UserRegistrationForm(UserCreationForm):
         expiration = now() + timedelta(hours=48)
         record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
         record.send_verification_email()
+        # send_verification_email.delay(user.id)
         return user
