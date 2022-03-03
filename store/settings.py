@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
+    'storages',
 
     'products',
     'users',
@@ -183,3 +184,9 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 
 # run Celery: celery -A store worker --loglevel=debug --concurrency=4
+
+# Storages
+
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DROPBOX_OAUTH2_TOKEN = 'sl.BDGUDBeEXSXE7iEMluy_Er3NxtAYvskxTMJaGLx4Ei7QZEJa_AWjFPBbTzb0cnxawvZaZPWvfhcsC98l17drr0wQaci8GjZl5dlZM8_lGXVwQYuLEp2jOrdKgYsygrXQ3-CZR-tsZmhH'
+DROPBOX_ROOT_PATH = '/media'
