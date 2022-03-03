@@ -30,6 +30,11 @@ env = environ.Env(
     EMAIL_HOST_USER=(str),
     EMAIL_HOST_PASSWORD=(str),
     EMAIL_USE_SSL=(bool),
+
+    REDIS_HOST=(str),
+    REDIS_PORT=(int),
+    CELERY_RESULT_BACKEND=(str),
+    CELERY_BROKER_URL=(str),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -176,10 +181,9 @@ DOMAIN_NAME = env('DOMAIN_NAME')
 
 # Redis settings
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = '6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_BROKER_URL = 'redis://localhost:6379'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+REDIS_HOST = env('REDIS_HOST')
+REDIS_PORT = env('REDIS_PORT')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+CELERY_BROKER_URL = env('CELERY_BROKER_URL')
 
 # run Celery: celery -A store worker --loglevel=debug --concurrency=4
