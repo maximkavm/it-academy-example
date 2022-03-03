@@ -21,7 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Env
 env = environ.Env(
-    DEBUG=(bool)
+    DEBUG=(bool),
+    DOMAIN_NAME=(str),
+
+    EMAIL_BACKEND=(str),
+    EMAIL_HOST=(str),
+    EMAIL_PORT=(int),
+    EMAIL_HOST_USER=(str),
+    EMAIL_HOST_PASSWORD=(str),
+    EMAIL_USE_SSL=(bool),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -158,21 +166,13 @@ AUTH_USER_MODEL = 'users.User'
 # Sending e-mails
 # https://docs.djangoproject.com/en/4.0/topics/email/
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'django@geekshop'
-EMAIL_HOST_PASSWORD = 'geekshop'
-EMAIL_USE_SSL = False
-DOMAIN_NAME = 'localhost:8000'
-
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'geekshop-optimization@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'qwertypP'
-# EMAIL_USE_SSL = True
-# EMAIL_USE_TLS = False
-# DOMAIN_NAME = 'localhost:8000'
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+DOMAIN_NAME = env('DOMAIN_NAME')
 
 # Redis settings
 
